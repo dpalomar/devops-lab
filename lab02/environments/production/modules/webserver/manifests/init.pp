@@ -42,33 +42,37 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class webserver {
+class webserver(
+    $web_directory,
+    $virtual_host = '',
+    $git_repository = ''
+    ){
 
 	notify{'aprovisionando un servidor web':}
 
 	include apache
-	file{'/var/www/git':
+	file{$web_directory:
 	ensure => directory,
 		owner => 'www-data',
 		group => 'www-data',
 	}
 
-	apache::vhost{'git.infiniteskills.com':
+	apache::vhost{$virtual_host:
 		port    => '80',
-		docroot => '/var/www/git',
-		require => File['/var/www/git'],
+		docroot => $web_directory,
+		require => File[$web_directory],
 
 	}
 
-	vcsrepo{"/var/www/git":
+	vcsrepo{$web_directory:
 	ensure => present,
 		provider => git,
-		source   => 'https://github.com/infiniteSkills/git-example.git',
-		require  => File['/var/www/git'],
+		source   => $git_repository,
+		require  => File[$web_directory],
 
 	}
 
-	host{'git.infiniteskills.com':
+	host{$virtual_host:
 		ip => '127.0.0.1',
 	}
 }

@@ -1,0 +1,2 @@
+---
+webserver::virtual_host: 'git.example.com'

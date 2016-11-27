@@ -6,6 +6,9 @@ node /^puppet/{
 		stage => 'main',
 	}
 	class{'webserver':
-		stage => 'last',
+		stage          => 'last',
+		web_directory  => '/var/www/git',
+		git_repository => 'https://github.com/dpalomar/simple-example.git',
+		# virtual_host   => 'git.example.com',
 	}
 }
