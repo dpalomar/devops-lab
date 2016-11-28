@@ -1,0 +1,4 @@
+---
+webserver::virtual_host: 'git.example.com'
+webserver::web_directory: '/var/www/git'
+webserver::git_repository: 'https://github.com/dpalomar/simple-example.git'
