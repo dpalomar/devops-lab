@@ -35,6 +35,9 @@
 - [git](http://www.git-scm.com)
 - bash shell
 - Code editor like notepad++, sublime, atom, RubyMine
+- Vagrant plugins:
+    - vagrant-hostsmanager
+    - vagrant-vbguest
 - __Optional:__ Windows users can use [chocolatey](http://www.chocolatey.com)
 
 ## Lab 1
