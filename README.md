@@ -24,6 +24,7 @@
 - [Lab 5](#lab-5)
 - [Lab 6](#lab-6)
 - [Lab 7](#lab-7)
+- [Lab 8](#lab-8)
 
 <!-- /MarkdownTOC -->
 
@@ -35,9 +36,7 @@
 - [git](http://www.git-scm.com)
 - bash shell
 - Code editor like notepad++, sublime, atom, RubyMine
-- Vagrant plugins:
-    - vagrant-hostsmanager
-    - vagrant-vbguest
+- Vagrant plugins: `vbguest` and `hostsmanager`
 - __Optional:__ Windows users can use [chocolatey](http://www.chocolatey.com)
 
 ## Lab 1
@@ -65,9 +64,19 @@ Copy all contents of `lab02` folder and run `vagrant up`
 > 
 > - How to provision multiple machines.
 > - Using forge.
-> - Using other tools like Collective, Dashboard, R10K, ...
+> 
+
+Use initial Vagrantfile file from the lab03 folder
 
 ## Lab 4
+
+> The purpose of this lab is:
+> 
+> - Reporting
+> - Install and provision a machine with PuppetDB
+> - Install Puppetboard
+
+## Lab 5
 
 > The purpose of this lab is:
 > 
@@ -76,7 +85,8 @@ Copy all contents of `lab02` folder and run `vagrant up`
 > - Working with containers
 > - Basics of docker-compose
 
-## Lab 5
+
+## Lab 6
 
 > The purpose of this lab is:
 > 
@@ -84,7 +94,7 @@ Copy all contents of `lab02` folder and run `vagrant up`
 > 
 > Recommended tools: Eclipse, IntelliJ
 
-## Lab 6
+## Lab 7
 
 > The purpose of this lab is:
 > 
@@ -92,7 +102,7 @@ Copy all contents of `lab02` folder and run `vagrant up`
 > 
 > Recommended tools: Eclipse, IntelliJ, jenkins, maven, gradle
 
-## Lab 7
+## Lab 8
 
 > The purpose of this lab is:
 > 
