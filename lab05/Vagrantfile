@@ -1,0 +1,61 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$puppet_ip = "192.168.30.130"
+
+$puppet_agent = <<'EOF'
+wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
+dpkg -i puppetlabs-release-pc1-trusty.deb
+apt-get update
+sudo apt-get install puppet-agent -y
+/opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true
+EOF
+
+Vagrant.configure("2") do |config|
+  config.hostmanager.enabled = true
+  config.vm.box = "ubuntu/trusty64"
+
+  config.vm.define "puppetmaster" do |puppetmaster|
+    puppetmaster.vm.provider "virtualbox" do |v|
+      v.memory = 3072
+      v.cpus   = 2
+ 
+    end
+   puppetmaster.vm.hostname = "puppet"
+	 puppetmaster.vm.network "private_network", ip: $puppet_ip
+   puppetmaster.vm.network "forwarded_port", guest: 80, host: 8080
+   #puppetmaster.vm.provision "shell", path: "librarian-setup.sh"
+   puppetmaster.vm.provision "shell", inline: $puppet_agent
+	 # puppetmaster.vm.provision "shell", inline: "wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb"
+	 # puppetmaster.vm.provision "shell", inline: "dpkg -i puppetlabs-release-pc1-trusty.deb"
+  #  puppetmaster.vm.provision "shell", inline: "apt-get update"
+  #  puppetmaster.vm.provision "shell", inline: "sudo apt-get install puppet-agent -y"
+  #  puppetmaster.vm.provision "shell", inline: "/opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true"
+ #  puppetmaster.vm.provision "shell", inline: "apt-get install puppetserver -y"
+ #  puppetmaster.vm.provision "shell", inline: "sed -i 's/JAVA_ARGS=\"-Xms2g -Xmx2g -XX:MaxPermSize=256m\"/JAVA_ARGS=\"-Xms1g -Xmx1g -XX:MaxPermSize=256m\"/g' /etc/default/puppetserver"
+ #  puppetmaster.vm.provision "shell", inline: "service puppetserver start"
+ #  puppetmaster.vm.provision "shell", inline: "export PATH=/opt/puppetlabs/bin:$PATH"
+  
+    puppetmaster.vm.provision "puppet" do |puppet|
+     #puppet.options = "--verbose --debug"
+      puppet.environment_path = "environments"
+      puppet.environment = "production"
+      puppet.manifests_path = "environments/production/manifests"
+      puppet.module_path   = "environments/production/modules"
+      puppet.manifest_file = "site.pp"
+
+    end
+  end
+
+ config.vm.define "web01" do |web|
+
+  web.vm.provider "virtualbox" do |v|
+    v.memory = "512"
+
+  end
+
+  web.vm.hostname = "web01"
+  web.vm.provision "shell", inline: $puppet_agent
+
+  end
+end
