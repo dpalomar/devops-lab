@@ -22,10 +22,10 @@
 - [Lab 3](#lab-3)
 - [Lab 4](#lab-4)
 - [Lab 5](#lab-5)
-- [Lab 5](#lab-5-1)
 - [Lab 6](#lab-6)
 - [Lab 7](#lab-7)
 - [Lab 8](#lab-8)
+- [Lab 9](#lab-9)
 
 <!-- /MarkdownTOC -->
 
@@ -81,12 +81,12 @@ Use initial Vagrantfile file from the lab03 folder
 
 > The purpose is using mcollective
 > 
-> - To learn the mcollective infraestructure> 
+> - To learn the mcollective infraestructure 
 > - Install/configure activemq
 > - Install/configure mcollective servers/clients
 > - Basic commands and work with mcollective
 > 
-## Lab 5
+## Lab 6
 
 > The purpose of this lab is:
 > 
@@ -96,7 +96,7 @@ Use initial Vagrantfile file from the lab03 folder
 > - Basics of docker-compose
 
 
-## Lab 6
+## Lab 7
 
 > The purpose of this lab is:
 > 
@@ -104,7 +104,7 @@ Use initial Vagrantfile file from the lab03 folder
 > 
 > Recommended tools: Eclipse, IntelliJ
 
-## Lab 7
+## Lab 8
 
 > The purpose of this lab is:
 > 
@@ -112,7 +112,7 @@ Use initial Vagrantfile file from the lab03 folder
 > 
 > Recommended tools: Eclipse, IntelliJ, jenkins, maven, gradle
 
-## Lab 8
+## Lab 9
 
 > The purpose of this lab is:
 > 
