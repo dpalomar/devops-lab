@@ -1,0 +1,48 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$puppet_ip = "192.168.30.130"
+
+$puppet_master = <<'EOF'
+rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+yum update -y
+yum -y install epel-release https://yum.theforeman.org/releases/1.13/el7/x86_64/foreman-release.rpm
+yum -y install foreman-installer
+EOF
+$puppet_agent = <<'EOF'
+rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+yum update -y
+yum -y install puppet-agent
+/opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true
+
+EOF
+Vagrant.configure("2") do |config|
+  config.hostmanager.enabled = true
+  config.vm.box = "bento/centos-7.2"
+
+  config.vm.define "puppetmaster" do |puppetmaster|
+    puppetmaster.vm.provider "virtualbox" do |v|
+      v.memory = 3072
+      v.cpus   = 2
+ 
+    end
+   puppetmaster.vm.hostname = "puppet.home"
+	   puppetmaster.vm.network "private_network", ip: $puppet_ip
+	   puppetmaster.vm.network "forwarded_port", guest: 443, host: 443
+	   puppetmaster.vm.provision "shell", inline: $puppet_master
+
+  end
+
+ config.vm.define "ci01" do |ci|
+
+  ci.vm.provider "virtualbox" do |v|
+    v.memory = "512"
+
+  end
+
+  ci.vm.hostname = "ci01.home"
+  ci.vm.provision "shell", inline: $puppet_agent
+  ci.vm.network "forwarded_port", guest: 8080, host: 8080
+  
+  end
+end
